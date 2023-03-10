@@ -58,16 +58,20 @@ elseif isa(dataBlock, 'double')
     
     %generate a TIC
     ticData = sum(dataBlock, 2);
+
+    %gotta clear the dataBlock var
+    FullSpecData = dataBlock;
+    clear dataBlock;
     
     %I am lazy so just make the exact same structure.
     dataBlock.tic = ticData;
-    dataBlock.specData = dataBlock;
+    dataBlock.specdata = FullSpecData;
 
     %%%%NEEED TO FIX%%%%
     %The scan rate of the instrument needs to be known for other data
     %perhaps require the user to input data as a structure...
-    %for now assume the datarate is 50Hz for a quad (pretty quick)
-    dataBlock.dataRate = 50;
+    %for now assume the datarate is 100Hz for a quad (pretty quick)
+    dataBlock.dataRate = 100;
     
     %do the same as before
     tic_ffted = fft(dataBlock.tic);
